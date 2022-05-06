@@ -7,25 +7,30 @@
 
 // VARIABLES
 
-const URL = "http://www.omdbapi.com/?apikey=a71b148a&t=Die+Hard";
+const URL = "http://www.omdbapi.com/?apikey=a71b148a&t=";
 
-// ELEMENT REFERENCES
+// ELEMENT REFERENCES jQuery variables
 
 const $title = $('#title');
 const $year = $('#year');
 const $rated = $('#rated');
+const $form = $('form');
+const $input = $(`input[type="text"]`);
 
 
 //EVENT LISTENERS
-
+$form.on('submit',handleGetData)
 
 
 
 // FUNCTIONS
 
-function handleGetData() {
+function handleGetData(event) {
 
-    $.ajax(URL).then(function (data) {
+    event.preventDefault();
+    const userInput = $input.val();
+
+    $.ajax(URL + userInput).then(function (data) {
         console.log('movie data is ready')
         // console.log(data)
         $title.text(data.Title)
